@@ -661,7 +661,7 @@ function DataGrid<R, SR, K extends Key>(
   }
 
   function handlePaste() {
-    if (!onPaste || !onRowsChange || copiedCell === null || !isCellEditable(selectedPosition)) {
+    if (!onPaste || !onRowsChange || !isCellEditable(selectedPosition)) {
       return;
     }
 
@@ -670,8 +670,7 @@ function DataGrid<R, SR, K extends Key>(
     const targetRow = rawRows[getRawRowIdx(rowIdx)];
 
     const updatedTargetRow = onPaste({
-      sourceRow: copiedCell.row,
-      sourceColumnKey: copiedCell.columnKey,
+      
       targetRow,
       targetColumnKey: targetColumn.key
     });

@@ -214,8 +214,8 @@ export interface CopyEvent<TRow> {
 }
 
 export interface PasteEvent<TRow> {
-  sourceColumnKey: string;
-  sourceRow: TRow;
+  sourceColumnKey?: string;
+  sourceRow?: TRow;
   targetColumnKey: string;
   targetRow: TRow;
 }
