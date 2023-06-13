@@ -33,7 +33,7 @@
     "start": "vite serve --clearScreen false",
     "preview": "vite preview",
     "build:website": "vite build",
-    "build": "rollup --config --no-stdin",
+    "build": "vite build",
     "build:types": "tsc -p tsconfig.lib.json && api-extractor run --local --verbose",
     "test": "vitest run",
     "test:watch": "vitest watch",
