@@ -1,6 +1,6 @@
 {
   "name": "pro-react-data-grid",
-  "version": "7.0.2-beta.33",
+  "version": "7.0.3-beta.33",
   "license": "MIT",
   "description": "Feature-rich and customizable data grid React component with copy paste support",
   "keywords": [
@@ -20,8 +20,8 @@
     }
   },
   "browser": "./lib/bundle.js",
-  "main": "./lib/bundle.js",
-  "module": "./lib/bundle.js",
+  "main": "./src/index.js",
+  "module": "./src/index.js",
   "types": "./lib/index.d.ts",
   "files": [
     "lib"
@@ -33,7 +33,7 @@
     "start": "vite serve --clearScreen false",
     "preview": "vite preview",
     "build:website": "vite build",
-    "build": "vite build",
+    "build": "rollup --config --no-stdin",
     "build:types": "tsc -p tsconfig.lib.json && api-extractor run --local --verbose",
     "test": "vitest run",
     "test:watch": "vitest watch",
