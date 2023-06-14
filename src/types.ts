@@ -1,4 +1,4 @@
-import type { ReactElement, ComponentType, ForwardRefExoticComponent, RefAttributes } from 'react';
+import type { ComponentType, ForwardRefExoticComponent, ReactElement, RefAttributes } from 'react';
 
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
@@ -174,8 +174,8 @@ export interface CopyEvent<TRow> {
 }
 
 export interface PasteEvent<TRow> {
-  sourceColumnKey: string;
-  sourceRow: TRow;
+  sourceColumnKey?: string;
+  sourceRow?: TRow;
   targetColumnKey: string;
   targetRow: TRow;
 }

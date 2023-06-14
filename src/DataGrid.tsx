@@ -1,66 +1,64 @@
-import { forwardRef, useState, useRef, useImperativeHandle, useCallback, useMemo } from 'react';
-import type { Key, RefAttributes } from 'react';
 import clsx from 'clsx';
-
-import {
-  rootClassname,
-  viewportDraggingClassname,
-  focusSinkClassname,
-  cellAutoResizeClassname,
-  rowSelected,
-  rowSelectedWithFrozenCell
-} from './style';
-import {
-  useLayoutEffect,
-  useGridDimensions,
-  useCalculatedColumns,
-  useViewportColumns,
-  useViewportRows,
-  useLatestFunc,
-  RowSelectionChangeProvider
-} from './hooks';
-import HeaderRow from './HeaderRow';
-import Row from './Row';
-import GroupRowRenderer from './GroupRow';
-import SummaryRow from './SummaryRow';
-import EditCell from './EditCell';
-import DragHandle from './DragHandle';
-import SortIcon from './SortIcon';
-import { CheckboxFormatter } from './formatters';
+import { forwardRef, useCallback, useImperativeHandle, useMemo, useRef, useState } from 'react';
+import type { Key, RefAttributes } from 'react';
 import {
   DataGridDefaultComponentsProvider,
   useDefaultComponents
 } from './DataGridDefaultComponentsProvider';
+import DragHandle from './DragHandle';
+import EditCell from './EditCell';
+import { CheckboxFormatter } from './formatters';
+import GroupRowRenderer from './GroupRow';
+import HeaderRow from './HeaderRow';
 import {
-  assertIsValidKeyGetter,
-  getNextSelectedCellPosition,
-  isSelectedCellEditable,
-  canExitGrid,
-  isCtrlKeyHeldDown,
-  isDefaultCellInput,
-  getColSpan,
-  sign,
-  abs,
-  getSelectedCellColSpan,
-  scrollIntoView
-} from './utils';
-
+  RowSelectionChangeProvider,
+  useCalculatedColumns,
+  useGridDimensions,
+  useLatestFunc,
+  useLayoutEffect,
+  useViewportColumns,
+  useViewportRows
+} from './hooks';
+import Row from './Row';
+import SortIcon from './SortIcon';
+import {
+  cellAutoResizeClassname,
+  focusSinkClassname,
+  rootClassname,
+  rowSelected,
+  rowSelectedWithFrozenCell,
+  viewportDraggingClassname
+} from './style';
+import SummaryRow from './SummaryRow';
 import type {
   CalculatedColumn,
+  CellNavigationMode,
   Column,
+  Components,
+  CopyEvent,
+  Direction,
+  FillEvent,
+  Maybe,
+  PasteEvent,
   Position,
+  RowHeightArgs,
   RowsChangeData,
   SelectRowEvent,
-  FillEvent,
-  CopyEvent,
-  PasteEvent,
-  CellNavigationMode,
-  SortColumn,
-  RowHeightArgs,
-  Maybe,
-  Components,
-  Direction
+  SortColumn
 } from './types';
+import {
+  abs,
+  assertIsValidKeyGetter,
+  canExitGrid,
+  getColSpan,
+  getNextSelectedCellPosition,
+  getSelectedCellColSpan,
+  isCtrlKeyHeldDown,
+  isDefaultCellInput,
+  isSelectedCellEditable,
+  scrollIntoView,
+  sign
+} from './utils';
 
 export interface SelectCellState extends Position {
   readonly mode: 'SELECT';
@@ -645,7 +643,7 @@ function DataGrid<R, SR, K extends Key>(
   }
 
   function handlePaste() {
-    if (!onPaste || !onRowsChange || copiedCell === null || !isCellEditable(selectedPosition)) {
+    if (!onPaste || !onRowsChange || !isCellEditable(selectedPosition)) {
       return;
     }
 
@@ -653,8 +651,6 @@ function DataGrid<R, SR, K extends Key>(
     const targetRow = rawRows[getRawRowIdx(rowIdx)];
 
     const updatedTargetRow = onPaste({
-      sourceRow: copiedCell.row,
-      sourceColumnKey: copiedCell.columnKey,
       targetRow,
       targetColumnKey: columns[idx].key
     });

@@ -1,6 +1,6 @@
 {
-  "name": "react-data-grid",
-  "version": "7.0.0-beta.13",
+  "name": "pro-react-data-grid",
+  "version": "7.0.1-beta.13",
   "license": "MIT",
   "description": "Feature-rich and customizable data grid React component",
   "keywords": [
@@ -8,7 +8,7 @@
     "data grid"
   ],
   "repository": "github:adazzle/react-data-grid",
-  "bugs": "https://github.com/adazzle/react-data-grid/issues",
+  "bugs": "https://github.com/sakibProcol/pro-react-data-grid.git",
   "type": "module",
   "exports": {
     ".": {
