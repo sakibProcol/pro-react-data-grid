@@ -11,7 +11,7 @@ const headerSortCell = css`
   &:focus {
     outline: none;
   }
-`;
+` as string;
 
 const headerSortCellClassname = `rdg-header-sort-cell ${headerSortCell}`;
 
